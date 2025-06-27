@@ -58,9 +58,13 @@ function App() {
       </section>
       <section className="game-body">
         <form action="" className="game-form">
-          <h2 className="trials-remaining">
-            {state.numTrials} Trials Remaining
-          </h2>
+          {state.numTrials > 0 ? (
+            <h2 className="trials-remaining">
+              {state.numTrials} Trials Remaining
+            </h2>
+          ) : (
+            <h2 className="trials-remaining">Press 'NewGame'</h2>
+          )}
           <input
             type="number"
             placeholder="00"

@@ -13,6 +13,7 @@ html {
   --main-black: #262626;
   --light-grey: #727272;
   --white-tint: #ecfffc;
+  --subtle-red: #ff6161;
 }
 
 body {
@@ -93,6 +94,12 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.guess-btn:disabled,
+.new-game-btn:disabled {
+  background-color: var(--light-grey);
+  cursor: not-allowed;
 }
 /* Game Body styling ends here */
 
