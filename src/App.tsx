@@ -11,9 +11,14 @@ type gameAppState = {
   randomSecretNumber: number | null;
 };
 
-type gameAction = {
-  type: "NEW_GAME";
-};
+type gameAction =
+  | {
+      type: "NEW_GAME";
+    }
+  | {
+      type: "SET_USER_GUESS";
+      payload: string;
+    };
 
 function reducerFunction(state: gameAppState, action: gameAction) {
   if (action.type === "NEW_GAME") {
@@ -26,6 +31,7 @@ function reducerFunction(state: gameAppState, action: gameAction) {
       numTrials: 10,
     };
   }
+
   return state;
 }
 
@@ -70,6 +76,10 @@ function App() {
             placeholder="00"
             className="guess-input"
             readOnly={state.inputDisabled}
+            value={state.userGuess}
+            onChange={(e) =>
+              dispatch({ type: "SET_USER_GUESS", payload: e.target.value })
+            }
           />
           <p className="game-info">{state.gameInfo}</p>
           <button className="guess-btn" disabled={state.guessBtnDisabled}>
