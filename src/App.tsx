@@ -18,6 +18,9 @@ type gameAction =
   | {
       type: "SET_USER_GUESS";
       payload: string;
+    }
+  | {
+      type: "GUESS_ACTION";
     };
 
 function reducerFunction(state: gameAppState, action: gameAction) {
@@ -29,7 +32,19 @@ function reducerFunction(state: gameAppState, action: gameAction) {
       guessBtnDisabled: false,
       randomSecretNumber: generateRandomNumber(),
       numTrials: 10,
+      gameInfo: "Secret Number Generated | Good Luck !",
     };
+  }
+
+  if (action.type === "SET_USER_GUESS") {
+    return {
+      ...state,
+      userGuess: action.payload,
+    };
+  }
+
+  if (action.type === "GUESS_ACTION") {
+    console.log(state.userGuess);
   }
 
   return state;
@@ -82,7 +97,12 @@ function App() {
             }
           />
           <p className="game-info">{state.gameInfo}</p>
-          <button className="guess-btn" disabled={state.guessBtnDisabled}>
+          <button
+            className="guess-btn"
+            type="button"
+            disabled={state.guessBtnDisabled}
+            onClick={() => dispatch({ type: "GUESS_ACTION" })}
+          >
             Guess
           </button>
         </form>
