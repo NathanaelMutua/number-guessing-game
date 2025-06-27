@@ -32,6 +32,7 @@ function reducerFunction(state: gameAppState, action: gameAction) {
       inputDisabled: false,
       guessBtnDisabled: false,
       randomSecretNumber: generateRandomNumber(),
+      userGuess: "",
       numTrials: 10,
       gameInfo: "Good Luck !",
     };
