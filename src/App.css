@@ -103,8 +103,19 @@ body {
   width: 100vw;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: var(--main-black);
   color: var(--white-tint);
   padding: 1rem 3rem;
+}
+
+.copyright {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 1.4rem;
+}
+
+.social-link {
+  padding: 0 0.5rem;
+  color: var(--white-tint);
 }
 /* Footer styling ends here */

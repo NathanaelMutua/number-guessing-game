@@ -1,18 +1,76 @@
+import { useReducer } from "react";
 import "./App.css";
 
+type gameAppState = {
+  gameButtonDisabled: boolean;
+  inputDisabled: boolean;
+  guessBtnDisabled: boolean;
+  gameInfo: string | null;
+  numTrials: number;
+  userGuess: string;
+  randomSecretNumber: number | null;
+};
+
+type gameAction = {
+  type: "NEW_GAME";
+};
+
+function reducerFunction(state: gameAppState, action: gameAction) {
+  if (action.type === "NEW_GAME") {
+    return {
+      ...state,
+      gameButtonDisabled: true,
+      inputDisabled: false,
+      guessBtnDisabled: false,
+      randomSecretNumber: generateRandomNumber(),
+      numTrials: 10,
+    };
+  }
+  return state;
+}
+
+function generateRandomNumber() {
+  return Math.trunc(Math.random() * 100);
+}
+
 function App() {
+  const [state, dispatch] = useReducer(reducerFunction, {
+    gameButtonDisabled: false,
+    inputDisabled: true,
+    guessBtnDisabled: true,
+    gameInfo: null,
+    numTrials: 0,
+    userGuess: "",
+    randomSecretNumber: null,
+  });
+
   return (
     <>
       <section className="header">
         <h2 className="game-instructions">Guess a number between 1 and 100</h2>
-        <button className="new-game-btn">New Game</button>
+        <button
+          className="new-game-btn"
+          disabled={state.gameButtonDisabled}
+          onClick={() => dispatch({ type: "NEW_GAME" })}
+        >
+          New Game
+        </button>
       </section>
       <section className="game-body">
         <form action="" className="game-form">
-          <h2 className="trials-remaining">10 Trials Remaining</h2>
-          <input type="number" placeholder="00" className="guess-input" />
-          <p className="game-info">20 is too high</p>
-          <button className="guess-btn">Guess</button>
+          <h2 className="trials-remaining">
+            {state.numTrials} Trials Remaining
+          </h2>
+          <input
+            type="number"
+            placeholder="00"
+            className="guess-input"
+            readOnly={state.inputDisabled}
+          />
+          <p className="game-info">{state.gameInfo}</p>
+          <button className="guess-btn" disabled={state.guessBtnDisabled}>
+            Guess
+          </button>
         </form>
       </section>
       <section className="footer">
