@@ -8,7 +8,7 @@ type gameAppState = {
   gameInfo: string | null;
   numTrials: number;
   userGuess: string;
-  randomSecretNumber: number | null;
+  randomSecretNumber: number;
 };
 
 type gameAction =
@@ -21,6 +21,7 @@ type gameAction =
     }
   | {
       type: "GUESS_ACTION";
+      payload: number;
     };
 
 function reducerFunction(state: gameAppState, action: gameAction) {
@@ -32,7 +33,7 @@ function reducerFunction(state: gameAppState, action: gameAction) {
       guessBtnDisabled: false,
       randomSecretNumber: generateRandomNumber(),
       numTrials: 10,
-      gameInfo: "Secret Number Generated | Good Luck !",
+      gameInfo: "Good Luck !",
     };
   }
 
@@ -44,14 +45,53 @@ function reducerFunction(state: gameAppState, action: gameAction) {
   }
 
   if (action.type === "GUESS_ACTION") {
-    console.log(state.userGuess);
+    const trialNumber: number = state.numTrials - 1;
+
+    if (trialNumber === 0) {
+      return {
+        ...state,
+        gameButtonDisabled: false,
+        inputDisabled: true,
+        guessBtnDisabled: true,
+        numTrials: trialNumber,
+        gameInfo: "You Lost !",
+      };
+    }
+
+    if (action.payload === state.randomSecretNumber) {
+      return {
+        ...state,
+        gameInfo: `You won ! Your score is ${state.numTrials * 10}%`,
+        guessBtnDisabled: true,
+        gameButtonDisabled: false,
+        inputDisabled: true,
+      };
+    }
+
+    if (action.payload > state.randomSecretNumber) {
+      return {
+        ...state,
+        numTrials: trialNumber,
+        gameInfo: `${state.userGuess} is too High!`,
+      };
+    }
+
+    if (action.payload < state.randomSecretNumber) {
+      return {
+        ...state,
+        numTrials: trialNumber,
+        gameInfo: `${state.userGuess} is too Low!`,
+      };
+    }
   }
 
   return state;
 }
 
 function generateRandomNumber() {
-  return Math.trunc(Math.random() * 100);
+  const number = Math.trunc(Math.random() * 100);
+  console.log(number);
+  return number;
 }
 
 function App() {
@@ -60,9 +100,9 @@ function App() {
     inputDisabled: true,
     guessBtnDisabled: true,
     gameInfo: null,
-    numTrials: 0,
+    numTrials: 10,
     userGuess: "",
-    randomSecretNumber: null,
+    randomSecretNumber: 0,
   });
 
   return (
@@ -101,7 +141,12 @@ function App() {
             className="guess-btn"
             type="button"
             disabled={state.guessBtnDisabled}
-            onClick={() => dispatch({ type: "GUESS_ACTION" })}
+            onClick={() =>
+              dispatch({
+                type: "GUESS_ACTION",
+                payload: Number(state.userGuess),
+              })
+            }
           >
             Guess
           </button>
