@@ -10,9 +10,101 @@ html {
 
 :root {
   --main-font: "Bitcount Grid Double", system-ui;
+  --main-black: #262626;
+  --light-grey: #727272;
+  --white-tint: #ecfffc;
 }
 
 body {
   font-family: var(--main-font);
-  font-size: 1.6rem;
+  font-size: 1.7rem;
+  color: var(--main-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
 }
+
+/* Header styling starts here */
+.header {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+}
+
+.new-game-btn {
+  border: none;
+  border-radius: 8px;
+  background-color: var(--main-black);
+  font-family: var(--main-font);
+  font-size: 2rem;
+  color: var(--white-tint);
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+/* Header styling ends here */
+
+/* Game Body styling starts here */
+.game-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.trials-remaining {
+  font-size: 3rem;
+  padding-block: 2rem;
+}
+
+.guess-input {
+  padding: 0.5rem;
+  width: 20rem;
+  text-align: center;
+  font-family: var(--main-font);
+  font-size: 5rem;
+  font-weight: 700;
+  border: 3px solid var(--light-grey);
+  border-radius: 5px;
+}
+
+.game-info {
+  font-size: 3rem;
+  padding-block: 2rem;
+}
+
+.guess-btn {
+  padding: 1rem 2rem;
+  background-color: var(--main-black);
+  color: var(--white-tint);
+  font-family: var(--main-font);
+  font-size: 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* Game Body styling ends here */
+
+/* Footer styling starts here */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--main-black);
+  color: var(--white-tint);
+  padding: 1rem 3rem;
+}
+/* Footer styling ends here */

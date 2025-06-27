@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <section className="header">
+        <h2 className="game-instructions">Guess a number between 1 and 100</h2>
+        <button className="new-game-btn">New Game</button>
+      </section>
+      <section className="game-body">
+        <form action="" className="game-form">
+          <h2 className="trials-remaining">10 Trials Remaining</h2>
+          <input type="number" placeholder="00" className="guess-input" />
+          <p className="game-info">20 is too high</p>
+          <button className="guess-btn">Guess</button>
+        </form>
+      </section>
+      <section className="footer">
+        <h3 className="game-subtitle">Number Guessing Game</h3>
+        <p className="copyright">&copy; 2025 Nxthxnael</p>
+        <div className="social-icons">
+          <a
+            href="https://github.com/NathanaelMutua/number-guessing-game"
+            className="social-link"
+          >
+            <i className="fa-brands fa-github"></i>
+          </a>
+          <a
+            href="https://linkedin.com/in/nathanaelmutua/"
+            className="social-link"
+          >
+            <i className="fa-brands fa-linkedin-in"></i>
+          </a>
+        </div>
+      </section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
